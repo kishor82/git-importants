@@ -225,3 +225,36 @@ For example, if your commit history is  `A-B-C-D-E-F`  with  `F`  as  `HEAD`, an
 9.  `git rebase --continue`
 10.  The rebase would complete.
 11.  Use  `git push -f`  to update your origin with the updated commits.
+
+
+# [How do you commit code as a different user?](https://stackoverflow.com/questions/3696938/how-do-you-commit-code-as-a-different-user)
+
+Use -c option along with git-commit to override any previous configuration. It will not touch your global/project configuration. For example, to override name and email:
+
+```
+git -c user.name='My Name' -c user.email='my@email.com' commit -m "Custom message"
+
+```
+
+However, if you intend to keep it as an additional setting, I would suggest to use an alias. Edit your  `~/.gitconfig`  file and append a new alias for each non-default user and email.
+
+```
+[user]
+  name = My Name
+  email = default@email.com
+
+[alias]
+  commit-x = -c user.name='My X Name' -c user.email='mr_x@email.com' commit
+  commit-y = -c user.name='My Y Name' -c user.email='mr_y@email.com' commit
+  commit-z = -c user.name='My Z Name' -c user.email='mr_z@email.com' commit
+
+```
+
+Alias will be applied globally. Test it.
+
+```
+git commit -m "Custom message with committer and author My Name <default@email.com>"
+git commit-x -m "Custom message with committer and author My X Name <mr_x@email.com>"
+git commit-y -m "Custom message with committer and author My Y Name <mr_y@email.com>"
+git commit-z -m "Custom message with committer and author My Z Name <mr_z@email.com
+```

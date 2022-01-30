@@ -258,3 +258,9 @@ git commit-x -m "Custom message with committer and author My X Name <mr_x@email.
 git commit-y -m "Custom message with committer and author My Y Name <mr_y@email.com>"
 git commit-z -m "Custom message with committer and author My Z Name <mr_z@email.com
 ```
+
+
+
+# [git still shows files as modified after adding to .gitignore](https://stackoverflow.com/questions/9750606/git-still-shows-files-as-modified-after-adding-to-gitignore)
+
+`git update-index --assume-unchanged *path/to/file*`

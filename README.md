@@ -264,3 +264,22 @@ git commit-z -m "Custom message with committer and author My Z Name <mr_z@email.
 # [git still shows files as modified after adding to .gitignore](https://stackoverflow.com/questions/9750606/git-still-shows-files-as-modified-after-adding-to-gitignore)
 
 `git update-index --assume-unchanged *path/to/file*`
+
+# [How to update git commit author, but keep original date when amending?](https://stackoverflow.com/questions/41301627/how-to-update-git-commit-author-but-keep-original-date-when-amending)
+
+```bash
+git -c rebase.instructionFormat='%s%nexec GIT_COMMITTER_DATE="%cD" GIT_AUTHOR_DATE="%aD" git commit --amend --no-edit --reset-author' rebase -f <commit/branch before wrong author and email, or --root to rebase all>
+```
+
+- To add sign-off-by add -s to the `InstructionFormat` string
+
+# [Rewriting Git History: How do I remove a sign-off?](https://stackoverflow.com/questions/3690049/rewriting-git-history-how-do-i-remove-a-sign-off)
+
+Sign offs are just part of the message body. So, you'll want to use  `git filter-branch --msg-filter`  to run a command to find lines starting with  `Signed-off-by:`  and remove them.
+
+Something like
+
+```
+git filter-branch --msg-filter "sed /^Signed-off-by:/d"
+```
+should do the trick.

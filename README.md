@@ -283,3 +283,16 @@ Something like
 git filter-branch --msg-filter "sed /^Signed-off-by:/d"
 ```
 should do the trick.
+
+# [How can I remove an entry in global configuration with git config?](https://stackoverflow.com/questions/11868447/how-can-i-remove-an-entry-in-global-configuration-with-git-config)
+
+You can remove the  `user.name`  setting like this:
+
+```
+git config --global --unset user.name
+```
+And of course you can simply edit the config file:
+```
+git config --global --edit
+```
+and then remove the setting by hand.

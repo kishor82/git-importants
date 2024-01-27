@@ -296,3 +296,25 @@ And of course you can simply edit the config file:
 git config --global --edit
 ```
 and then remove the setting by hand.
+
+# [Multiple GitHub Accounts & SSH Config](https://stackoverflow.com/questions/3225862/multiple-github-accounts-ssh-config)
+
+two profiles set up, one for personal and one for work, set  `~/.ssh/config` as follows:
+
+```
+Host me.github.com
+    HostName github.com
+    PreferredAuthentications publickey
+    IdentityFile ~/.ssh/me_rsa
+
+Host work.github.com
+    HostName github.com
+    PreferredAuthentications publickey
+    IdentityFile ~/.ssh/work_rsa
+
+```
+
+
+Do `ssh-add ~/.ssh/work_rsa`. After that connections to github will use the correct profile. they defaulte to the first public key.
+
+
